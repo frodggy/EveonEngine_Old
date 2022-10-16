@@ -1,0 +1,13 @@
+[[cpp_bin]]
+src = "./src/main.cc"
+root = "./src"
+cxx = "clang++"
+cache = true
+cxxflags = ["-Wall", "-Werror"] # "-Wextra",
+ldflags = [
+    "-lGL",
+    "-lGLU",
+    "-lGLEW",
+    "-lglfw"
+]
+output = { exec_name = "eveon-engine", out_dir = "build" }
