@@ -1,0 +1,17 @@
+[project]
+name = "Dusk"
+icon = "resources://project_icon.png"
+main_scene = "resources://scenes/default.evscn"
+
+[project.config]
+resources_dir = "./assets"
+source_dir = "./src"
+plugin_dir = "./plugins"
+
+[project.gui]
+editor_version = "0.0.1"
+gui_backend = "glfw"
+
+[project.build]
+platforms = ["linux", "windows", "darwin"]
+binary_name = "dusk"

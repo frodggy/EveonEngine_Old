@@ -1,4 +1,4 @@
-#include "window.h"
+#include "window.hh"
 
 namespace eveon
 {
@@ -39,6 +39,8 @@ namespace eveon
                 std::cout << "Could not initialize GLEW!" << std::endl;
                 return;
             }
+
+            
         }
 
         void EvWindow::Set()
@@ -60,19 +62,25 @@ namespace eveon
             this->Exit(EV_GRACEFUL_EXIT);
         }
 
-        void EvWindow::Run(void (*func)(GLFWwindow *))
+        void EvWindow::Run(void (*func)(EvWindow *))
         {
             while (!glfwWindowShouldClose(this->m_window))
             {
+
+                glClearColor(0.546f, 0.12f, 0.65, 0.5f);
+
                 this->Clear();
-                func(this->m_window);
+
+                func(this);
+
                 this->Update();
             }
-            this->Exit(0);
+            this->Exit(EV_GRACEFUL_EXIT);
         }
 
         bool EvWindow::ShoudClose()
         {
+            glfwSetWindowShouldClose(this->m_window, GL_TRUE);
             return glfwWindowShouldClose(this->m_window);
         }
 
@@ -100,9 +108,11 @@ namespace eveon
             y = my;
         }
 
-        int EvWindow::Exit(int exit_code)
+        int EvWindow::Exit(EV_EXIT_CODE exit_code)
         {
             glfwTerminate();
+            glfwSetWindowShouldClose(this->m_window, GL_FALSE);
+            // this->~EvWindow();
             return exit_code;
         }
 
@@ -117,7 +127,6 @@ namespace eveon
             glfwSwapBuffers(this->m_window);
         }
 
-#pragma region callbacks
         void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
         {
             EvWindow *win = (EvWindow *)glfwGetWindowUserPointer(window);
@@ -141,6 +150,5 @@ namespace eveon
         {
             glViewport(0, 0, width, height);
         }
-#pragma endregion
     }
 }

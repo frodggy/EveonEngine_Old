@@ -24,8 +24,8 @@ namespace eveon
 
         public:
             EvWindow(str title, int width, int height);
-            void Run(void (*func)(GLFWwindow *));
-            int Exit(int exit_code);
+            void Run(void (*func)(EvWindow *));
+            int Exit(EV_EXIT_CODE exit_code);
             bool isKeyPressed(unsigned int keycode) const;
             bool isMouseButtonPressed(unsigned int button) const;
             void getMousePosition(double &x, double &y) const;
